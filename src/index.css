@@ -16,3 +16,19 @@ body {
 .aboutImg::after {
     @apply content-[''] w-full left-0 top-0 rounded-xl rotate-12 h-full absolute bg-gray-600 -z-10;
 }
+
+.swiper-pagination-bullet-active {
+    @apply bg-white;
+}
+
+input,
+textarea {
+    @apply bg-gray-700 outline-none rounded-lg p-3;
+}
+::placeholder {
+    @apply text-lg;
+}
+
+::selection {
+    @apply bg-cyan-600;
+}

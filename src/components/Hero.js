@@ -9,8 +9,7 @@ function Hero() {
                 <img
                     src={hero}
                     alt=""
-                    className="md:h-[500px] md:w-[460px] md:ml-[9rem] 
-                    mb-6 mt-9 mr-[-44.75rem] bg-cyan-600 rounded-xl"
+                    className="w-[300px] h-[400px] md:w-[380px] md:h-[500px] mx-auto my-9  bg-cyan-500 rounded-3xl"
                 />
             </div>
             <div className="flex-1">
