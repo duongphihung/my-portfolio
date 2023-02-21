@@ -33,7 +33,7 @@ function About() {
                                     </div>
                                 ))}
                             </div>
-                            <a href="./src/assets/CV_Dương Phi Hùng_Intern.pdf" className="block ml-6" download>
+                            <a href="./src/assets/CV_Duong Phi Hung_Intern.pdf" className="block ml-6" download>
                                 <button className="btn-primary">Dowload My CV</button>
                             </a>
                         </div>
