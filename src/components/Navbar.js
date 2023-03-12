@@ -7,8 +7,8 @@ function Navbar() {
     const menuLinks = [
         { name: 'HOME', link: '#home' },
         { name: 'ABOUT', link: '#about' },
-        { name: 'SKILLS', link: '#skill' },
-        { name: 'SKILLS', link: '#skill' },
+        { name: 'SKILLS', link: '#skills' },
+        { name: 'PROJECT', link: '#projects' },
         { name: 'CONTACT', link: '#contact' },
     ];
 
