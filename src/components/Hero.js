@@ -2,7 +2,31 @@ import React from 'react';
 import hero from '../assets/images/hero.png';
 
 function Hero() {
-    const social_media = ['logo-instagram', 'logo-facebook', 'logo-linkedin', 'logo-twitter'];
+    const social_media = [
+        'logo-instagram',
+        'logo-facebook',
+        'logo-linkedin',
+        'logo-twitter'
+    ];
+
+    const scial_media_links = [
+        {
+            icon: 'logo-instagram',
+            link: 'https://www.instagram.com/_phii.hung/'
+        },
+        {
+            icon: 'logo-facebook',
+            link: 'https://www.facebook.com/phii.hung.280964'
+        },
+        {
+            icon: 'logo-linkedin',
+            link: 'https://www.linkedin.com/in/phi-hung-97/'
+        },
+        {
+            icon: 'logo-twitter',
+            link: 'https://twitter.com/phi_hung_97'
+        }
+    ]
     return (
         <section id="home" className="min-h-screen flex py-10 md:flex-row flex-col items-center ">
             <div className="flex-1 items-center justify-center h-full">
