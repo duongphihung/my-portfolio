@@ -1,15 +1,7 @@
-import React from 'react';
 import hero from '../assets/images/hero.png';
 
 function Hero() {
-    const social_media = [
-        'logo-instagram',
-        'logo-facebook',
-        'logo-linkedin',
-        'logo-twitter'
-    ];
-
-    const scial_media_links = [
+    const social_media_links = [
         {
             icon: 'logo-instagram',
             link: 'https://www.instagram.com/_phii.hung/'
@@ -57,10 +49,18 @@ function Hero() {
                         className="mt-8 text-3xl flex items-center md:justify-start 
                     justify-center gap-5"
                     >
-                        {social_media.map((icon) => (
-                            <div key={icon} className="text-gray-500 hover:text-white cursor-pointer">
-                                <ion-icon name={icon}></ion-icon>
-                            </div>
+                        {social_media_links.map((social) => (
+                            <a
+                                key={social.icon}
+                                href={social.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-gray-500 hover:text-white cursor-pointer inline-block"
+                            >
+                                <span>
+                                    <ion-icon name={social.icon}></ion-icon>
+                                </span>
+                            </a>
                         ))}
                     </div>
                 </div>
