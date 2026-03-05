@@ -3,10 +3,11 @@ import aboutImg from '../assets/images/about.png';
 
 function About() {
     const info = [
-        { text: 'Year Student', count: '4th' },
-        { text: 'Personal Project', count: '4+' },
-        { text: 'Companies Intern', count: '1' },
+        { text: 'Years Experience', count: '2+' },
+        { text: 'Personal Projects', count: '4+' },
+        { text: 'Companies Worked', count: '2' },
     ];
+
     return (
         <section id="about" className="py-10 text-white">
             <div className="text-center mt-8">
@@ -14,15 +15,24 @@ function About() {
                     About <span className="text-cyan-600">Me</span>
                 </h3>
                 <p className="text-gray-400 my-3 text-lg">My introduction</p>
+
                 <div className="flex md:flex-row flex-col-reverse items-center md:gap-6 gap-12 px-10 max-w-6xl mx-auto">
+
                     <div className="p-2">
                         <div className="text-gray-300 my-3">
+
                             <p className="text-justify leading-7 w-11/12 mx-auto">
-                                As a 4th year IT student at the University of Information Technology and Communication
-                                Vietnam-Korea. I would like to apply for an internship company with a target study
-                                question, develop yourself, understand more about the actual project process through the
-                                business.
+                                I am a Front-End Developer with over 2 years of experience in building modern web
+                                applications. I graduated from the University of Information Technology and
+                                Communication Vietnam-Korea.
+
+                                I started my career as an intern and gained practical experience working on
+                                real-world projects in a company environment. Currently, I am working as a
+                                Front-End Developer where I focus on building responsive interfaces, optimizing
+                                performance, and improving user experience using modern technologies such as
+                                React, TypeScript, and modern UI frameworks.
                             </p>
+
                             <div className="flex m-10 items-center gap-7">
                                 {info.map((content) => (
                                     <div key={content.text}>
@@ -33,19 +43,29 @@ function About() {
                                     </div>
                                 ))}
                             </div>
-                            <a href="./src/assets/CV_Duong Phi Hung_Intern.pdf" className="block ml-6" download>
-                                <button className="btn-primary">Dowload My CV</button>
+
+                            <a href="../assets/CV_Duong_Phi_Hung.pdf" className="block ml-6" download>
+                                <button className="btn-primary">
+                                    Download My CV
+                                </button>
                             </a>
+
                         </div>
                     </div>
+
                     <div className="flex-1 md:mt-0 mt-6 flex justify-center items-center">
                         <div
                             className="lg:w-96 h-full relative sm:w-10/12 w-11/12
                             max-w-sm aboutImg"
                         >
-                            <img src={aboutImg} alt="" className="w-full object-cover bg-cyan-600 rounded-xl" />
+                            <img
+                                src={aboutImg}
+                                alt="about"
+                                className="w-full object-cover bg-cyan-600 rounded-xl"
+                            />
                         </div>
                     </div>
+
                 </div>
             </div>
         </section>
