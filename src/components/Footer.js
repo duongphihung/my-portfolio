@@ -1,11 +1,13 @@
-import React from 'react';
-
-const Footer = () => {
+export default function Footer() {
     return (
-        <div className="bg-gray-800 text-sm p-4 text-center text-white">
-            Copyright © 2023 Phi Hung.All Rights reserved.
-        </div>
+        <footer className="container footer">
+            <a className="wordmark" href="#home">
+                phihung<span>®</span>
+            </a>
+            <p>© {new Date().getFullYear()} Phi Hung. Crafted with intention.</p>
+            <a className="footer-top" href="#home">
+                Back to home ↑
+            </a>
+        </footer>
     );
-};
-
-export default Footer;
+}

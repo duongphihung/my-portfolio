@@ -1,50 +1,62 @@
-import React from 'react';
-
-const Contact = () => {
-    const contact_info = [
-        { logo: 'mail', text: 'dphung1010@gmail.com' },
-        { logo: 'logo-whatsapp', text: '0948434867' },
-        {
-            logo: 'location',
-            text: 'Da Nang, Viet Nam',
-        },
-    ];
+import { useState } from 'react';
+import Icon from './Icon';
+import Reveal from './Reveal';
+export default function Contact() {
+    const [copyState, setCopyState] = useState('Copy email');
+    async function copyEmail() {
+        try {
+            await navigator.clipboard.writeText('dphung1010@gmail.com');
+            setCopyState('Email copied!');
+        } catch {
+            setCopyState('Please select and copy the email above.');
+        }
+    }
     return (
-        <section id="contact" className="py-10 px-3 text-white">
-            <div className="text-center mt-8">
-                <h3 className="text-4xl font-semibold">
-                    Contact <span className="text-cyan-600">Me</span>
-                </h3>
-                <p className="text-gray-400 mt-3 text-lg">Get in touch</p>
-
-                <div
-                    className="mt-16 flex md:flex-row flex-col
-           gap-6 max-w-5xl bg-gray-800 md:p-6 p-2 rounded-lg mx-auto"
-                >
-                    <form className="flex flex-col flex-1 gap-5">
-                        <input type="text" placeholder="Your Name" />
-                        <input type="Email" placeholder="Your Email Address" />
-                        <textarea placeholder="Your Message" rows={10}></textarea>
-                        <button className="btn-primary w-fit">Send Message</button>
-                    </form>
-                    <div className="flex flex-col  gap-7 ">
-                        {contact_info.map((contact, i) => (
-                            <div
-                                key={i}
-                                className="flex flex-row  
-                    text-left gap-4 flex-wrap items-center"
-                            >
-                                <div className="min-w-[3.5rem]  text-3xl min-h-[3.5rem] flex items-center justify-center text-white bg-cyan-600 rounded-full">
-                                    <ion-icon name={contact.logo}></ion-icon>
-                                </div>
-                                <p className="md:text-base text-sm  break-words">{contact.text}</p>
-                            </div>
-                        ))}
+        <section id="contact" className="section container contact-section">
+            <Reveal>
+                <p className="eyebrow">04 / NEXT CHAPTER</p>
+                <div className="contact-title">
+                    <h2>
+                        Have something
+                        <br />
+                        <span className="serif-word">in mind?</span>
+                    </h2>
+                    <a
+                        className="contact-arrow"
+                        href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=dphung1010%40gmail.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Email Phi Hung via Gmail"
+                    >
+                        <Icon size={64} />
+                    </a>
+                </div>
+                <div className="contact-bottom">
+                    <div>
+                        <p>Let’s turn a good conversation into a great product.</p>
+                        <a
+                            className="email-link"
+                            href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=dphung1010%40gmail.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            dphung1010@gmail.com
+                        </a>
+                        <button className="copy-email" onClick={copyEmail} aria-live="polite">
+                            {copyState}
+                        </button>
+                    </div>
+                    <div className="contact-details">
+                        <span>BASED IN DA NANG, VIETNAM</span>
+                        <a href="tel:+84948434867">
+                            (+84) 948 434 867 <Icon size={16} />
+                        </a>
+                        <a href="https://www.linkedin.com/in/phi-hung-97/" target="_blank" rel="noreferrer">
+                            Let’s connect on LinkedIn <Icon size={16} />
+                        </a>
                     </div>
                 </div>
-            </div>
+            </Reveal>
         </section>
     );
-};
-
-export default Contact;
+}

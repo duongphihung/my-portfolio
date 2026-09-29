@@ -1,72 +1,82 @@
-import React, { useEffect, useState } from 'react';
-
-function Navbar() {
-    const [sticky, setSticky] = useState(false);
+import { useEffect, useRef, useState } from 'react';
+import Icon from './Icon';
+const links = [
+    ['Work', 'projects'],
+    ['About', 'about'],
+    ['Expertise', 'skills'],
+    ['Contact', 'contact'],
+];
+export default function Navbar({ isHome, route }) {
     const [open, setOpen] = useState(false);
-
-    const menuLinks = [
-        { name: 'HOME', link: '#home' },
-        { name: 'ABOUT', link: '#about' },
-        { name: 'SKILLS', link: '#skills' },
-        { name: 'PROJECT', link: '#projects' },
-        { name: 'CONTACT', link: '#contact' },
-    ];
-
+    const [active, setActive] = useState('');
+    const toggle = useRef(null);
     useEffect(() => {
-        window.addEventListener('scroll', () => {
-            window.scrollY > 0 ? setSticky(true) : setSticky(false);
-        });
+        const close = (event) => {
+            if (event.key === 'Escape') {
+                setOpen(false);
+                toggle.current?.focus();
+            }
+        };
+        window.addEventListener('keydown', close);
+        return () => window.removeEventListener('keydown', close);
     }, []);
+    useEffect(() => {
+        if (!isHome || !('IntersectionObserver' in window)) {
+            setActive('');
+            return;
+        }
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) setActive(entry.target.id);
+                });
+            },
+            { rootMargin: '-15% 0px -55% 0px' },
+        );
+        ['home', ...links.map(([, id]) => id)].forEach((id) => {
+            const section = document.getElementById(id);
+            if (section) observer.observe(section);
+        });
+        return () => observer.disconnect();
+    }, [isHome, route]);
     return (
-        <nav
-            className={`fixed w-full left-0 top-0 z-[999] 
-            ${sticky ? 'bg-white/60 text-gray-900' : 'text-white'}`}
-        >
-            <div className="flex items-center justify-between">
-                <div className="mx-7">
-                    <h4 className="text-4xl uppercase font-bold">
-                        PHI<span className="text-cyan-600">HUNG</span>
-                    </h4>
-                </div>
-                <div
-                    className={`
-                        ${sticky ? 'md:bg-white/0 bg-white' : 'bg-white'} 
-                        text-gray-900 md:block hidden px-7 py-2 font-medium 
-                        rounded-bl-full
-                    `}
-                >
-                    <ul className="flex items-center gap-1 py-2 text-lg">
-                        {menuLinks.map((menu, i) => (
-                            <li key={i} className="px-6 hover:text-cyan-600">
-                                <a href={menu.link}>{menu.name}</a>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-                <div
+        <header className="site-header">
+            <nav className="container nav" aria-label="Main navigation">
+                <a className="wordmark" href="#home" onClick={() => setOpen(false)} aria-label="Phi Hung home">
+                    phihung<span>®</span>
+                </a>
+                <button
+                    className="menu-toggle"
+                    ref={toggle}
+                    aria-expanded={open}
+                    aria-controls="navigation-links"
+                    aria-label={open ? 'Close navigation' : 'Open navigation'}
                     onClick={() => setOpen(!open)}
-                    className={`z-[999] 
-                    ${open ? 'text-gray-900' : 'text-gray-100'} 
-                    text-3xl md:hidden m-5`}
                 >
-                    <ion-icon name="menu"></ion-icon>
+                    <Icon name={open ? 'close' : 'menu'} />
+                </button>
+                <div id="navigation-links" className={`nav-links ${open ? 'is-open' : ''}`}>
+                    {links.map(([label, id]) => (
+                        <a
+                            key={id}
+                            href={`#${id}`}
+                            className={active === id ? 'active' : ''}
+                            aria-current={active === id ? 'location' : undefined}
+                            onClick={() => setOpen(false)}
+                        >
+                            {label}
+                        </a>
+                    ))}
+                    <a
+                        className="nav-contact"
+                        href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=dphung1010%40gmail.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Let’s talk <Icon size={16} />
+                    </a>
                 </div>
-                <div
-                    className={`md:hidden text-gray-900 absolute w-2/3 h-screen
-                    px-7 py-2 font-medium bg-white top-0 duration-300  
-                    ${open ? 'right-0' : 'right-[-100%]'}`}
-                >
-                    <ul className={'flex flex-col justify-center h-full gap-10 py-2 text-lg'}>
-                        {menuLinks.map((menu, i) => (
-                            <li key={i} className="px-6 hover:text-cyan-600">
-                                <a href={menu.link}>{menu.name}</a>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            </div>
-        </nav>
+            </nav>
+        </header>
     );
 }
-
-export default Navbar;

@@ -1,113 +1,90 @@
-import React from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import { Pagination, Autoplay } from 'swiper';
-
-import project1 from '../assets/images/project-1.png';
-import project2 from '../assets/images/project-2.jpg';
-import project3 from '../assets/images/project-3.jpg';
-import project4 from '../assets/images/project-4.jpg';
-import project5 from '../assets/images/project-5.png';
-import projectPerson from '../assets/images/project_person.png';
-
-function Project() {
-    const projects = [
-        {
-            img: project1,
-            name: 'Movie App',
-            github_link: '#',
-            live_link: '#',
-        },
-        {
-            img: project2,
-            name: 'Job search Web App',
-            github_link: '#',
-            live_link: '#',
-        },
-        {
-            img: project3,
-            name: 'Highking',
-            github_link: '#',
-            live_link: '#',
-        },
-        {
-            img: project4,
-            name: 'React Nav',
-            github_link: '#',
-            live_link: '#',
-        },
-        {
-            img: project5,
-            name: 'Vue Country',
-            github_link: '#',
-            live_link: '#',
-        },
-    ];
+import { useState } from 'react';
+import { projects } from '../data/projects';
+import Icon from './Icon';
+import Reveal from './Reveal';
+export default function Project() {
+    const [showAll, setShowAll] = useState(false);
     return (
-        <section id="projects" className="py-10 text-white">
-            <div className="text-center">
-                <h3 className="text-4xl font-semibold">
-                    My <span className="text-cyan-500">Projects</span>
-                </h3>
-                <p className="text-gray-400 mt-3 text-lg">My awesome works</p>
-            </div>
-            <br />
-            <div className="flex max-w-6xl gap-6 px-5 mx-auto items-center relative">
-                <div className="lg:w-2/3 w-full">
-                    <Swiper
-                        slidesPerview={1.2}
-                        spaceBetween={20}
-                        breakpoints={{
-                            768: {
-                                slidesPerView: 2,
-                            },
-                        }}
-                        loop={true}
-                        autoplay={{
-                            delay: 3000,
-                        }}
-                        pagination={{
-                            clickable: true,
-                        }}
-                        modules={[Pagination, Autoplay]}
-                    >
-                        {projects.map((project_info, i) => (
-                            <SwiperSlide key={i}>
-                                <div className="h-fit w-fit p-4 bg-slate-700 rounded-xl">
-                                    <img src={project_info.img} alt="" className="rounded-lg" />
-                                    <h3 className="text-xl my-4">{project_info.name}</h3>
-                                    <div className="flex gap-3">
-                                        <a
-                                            href={project_info.github_link}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            className="text-cyan-600 bg-gray-800 px-2 py-1 inline-block"
-                                        >
-                                            Github
-                                        </a>
-                                        <a
-                                            href={project_info.live_link}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            className="text-cyan-600 bg-gray-800 px-2 py-1 inline-block"
-                                        >
-                                            Live Demo
-                                        </a>
-                                    </div>
-                                </div>
-                            </SwiperSlide>
-                        ))}
-                    </Swiper>
-                </div>
-                <div className="lg:block hidden bg-gray-700 rounded-full">
-                    <div className="py-4 px-4">
-                        <img src={projectPerson} alt="" className="bg-cyan-600 rounded-full" />
+        <section id="projects" className="section work-section">
+            <div className="container">
+                <Reveal className="section-heading">
+                    <div>
+                        <p className="eyebrow">01 / SELECTED WORK</p>
+                        <h2>
+                            A few things
+                            <br />
+                            I’ve <span className="serif-word">built.</span>
+                        </h2>
                     </div>
+                    <p>
+                        A mix of ideas, interfaces, and thoughtful details.
+                        <br />
+                        Take a closer look at the work behind the screen.
+                    </p>
+                </Reveal>
+                <div className="project-grid">
+                    {projects.slice(0, showAll ? projects.length : 3).map((project, index) => (
+                        <Reveal
+                            key={project.slug}
+                            className={index === 0 ? 'project-featured' : ''}
+                            delay={(index % 2) * 80}
+                        >
+                            <a
+                                className={`project-card tone-${project.tone}`}
+                                href={`#/projects/${project.slug}`}
+                                aria-label={`View ${project.name} case study`}
+                            >
+                                <div className="project-visual">
+                                    <div className="project-visual-top">
+                                        <span>
+                                            {String(index + 1).padStart(2, '0')} / {project.category}
+                                        </span>
+                                        <span className="project-open">
+                                            <Icon />
+                                        </span>
+                                    </div>
+                                    <div className="project-browser">
+                                        <div className="browser-bar">
+                                            <i />
+                                            <i />
+                                            <i />
+                                            <span>{project.name.toLowerCase().replaceAll(' ', '')}.design</span>
+                                        </div>
+                                        <img
+                                            src={project.image}
+                                            alt={`${project.name} interface preview`}
+                                            loading="lazy"
+                                        />
+                                    </div>
+                                    <span className="view-case">
+                                        View case study <Icon size={17} />
+                                    </span>
+                                </div>
+                                <div className="project-meta">
+                                    <div>
+                                        <h3>{project.name}</h3>
+                                        <p>{project.tagline}</p>
+                                    </div>
+                                    <span className="project-tech">
+                                        {project.stack[0]} <span>↗</span>
+                                    </span>
+                                </div>
+                            </a>
+                        </Reveal>
+                    ))}
                 </div>
+                <Reveal className="work-bottom">
+                    <span>ALWAYS EXPLORING. ALWAYS BUILDING.</span>
+                    <button
+                        className="button button-outline"
+                        onClick={() => setShowAll(!showAll)}
+                        aria-expanded={showAll}
+                    >
+                        {showAll ? 'Show selected work' : `More projects (${projects.length - 3})`}
+                        <Icon name={showAll ? 'arrow-up-right' : 'arrow-down'} size={17} />
+                    </button>
+                </Reveal>
             </div>
         </section>
     );
 }
-
-export default Project;
